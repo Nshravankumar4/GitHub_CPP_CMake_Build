@@ -17,13 +17,13 @@ This project demonstrates how to set up a **C++ application** built with **CMake
 cpp-cmake-ci-demo/
 ├── CMakeLists.txt
 ├── include/
-│ └── hello.h
+│   └── hello.h
 ├── src/
-│ ├── hello.cpp
-│ └── main.cpp
+│   ├── hello.cpp
+│   └── main.cpp
 └── .github/
-└── workflows/
-└── build.yml
+    └── workflows/
+        └── build.yml
 
 ## 🔄 Workflow Overview
 1. Checks out repository  
