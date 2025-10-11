@@ -29,8 +29,3 @@ cd build
 cmake ..
 make
 ./app
-
-
-https://github.com/user-attachments/assets/9d4c0dce-116a-4d57-8bfd-1e7f8110a7d8
-
-
