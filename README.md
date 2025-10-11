@@ -16,7 +16,6 @@ This project demonstrates how to set up a **C++ application** built with **CMake
 ## 🧩 Folder Structure
 <img width="208" height="252" alt="image" src="https://github.com/user-attachments/assets/13b93e1b-ed01-489b-bafe-835082702bbc" />
 
-
 ## 🔄 Workflow Overview
 1. Checks out repository  
 2. Installs CMake & g++  
