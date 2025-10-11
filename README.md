@@ -24,3 +24,17 @@ cpp-cmake-ci-demo/
 └── .github/
 └── workflows/
 └── build.yml
+
+## 🔄 Workflow Overview
+1. Checks out repository  
+2. Installs CMake & g++  
+3. Builds the project  
+4. Runs executable
+
+## 🧪 Run Locally
+```bash
+mkdir build
+cd build
+cmake ..
+make
+./app
