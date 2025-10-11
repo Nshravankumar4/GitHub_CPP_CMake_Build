@@ -14,3 +14,27 @@ This project demonstrates how to set up a **C++ application** built with **CMake
 - Extendable to include testing frameworks (e.g., GoogleTest)
 
 ## 🧩 Folder Structure
+cpp-cmake-ci-demo/
+├── CMakeLists.txt
+├── include/
+│ └── hello.h
+├── src/
+│ ├── hello.cpp
+│ └── main.cpp
+└── .github/
+└── workflows/
+└── build.yml
+
+## 🔄 Workflow Overview
+1. Checks out repository  
+2. Installs CMake & g++  
+3. Builds the project  
+4. Runs executable
+
+## 🧪 Run Locally
+```bash
+mkdir build
+cd build
+cmake ..
+make
+./app
