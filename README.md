@@ -1,3 +1,5 @@
+<img width="1280" height="657" alt="buildc++" src="https://github.com/user-attachments/assets/7a4d0f13-8349-45f4-b28e-117571acdd63" />
+
 # 🧠 C++ CI/CD Demo using CMake and GitHub Actions
 
 This project demonstrates how to set up a **C++ application** built with **CMake** and automated using **GitHub Actions** for continuous integration (CI).
@@ -29,3 +31,4 @@ cd build
 cmake ..
 make
 ./app
+
