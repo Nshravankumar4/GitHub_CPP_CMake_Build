@@ -1,15 +1,8 @@
+#include "hello.h"
+#include <gtest/gtest.h>
 
-#include <iostream>
-#include "../include/hello.h"  // Include the header for getMessage()
+class HelloTest : public ::testing::Test {};
 
-int main() {
-    std::string msg = getMessage();
-
-    if (msg == "Hello from CI/CD C++ project!") {
-        std::cout << "Test Passed!" << std::endl;
-        return 0; // success
-    } else {
-        std::cout << "Test Failed!" << std::endl;
-        return 1; // failure
-    }
+TEST_F(HelloTest, MessageTest) {
+    EXPECT_EQ(getMessage(), "Hello from CI/CD C++ project!");
 }
