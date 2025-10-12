@@ -75,33 +75,7 @@ pipeline {
                 }
             }
         }
-/*
-        stage('Push to Stage') {
-            when {
-                expression { currentBuild.currentResult == 'SUCCESS' }
-            }
-            steps {
-                script {
-                    if (!isUnix()) {
-                        bat '''
-                        git checkout -B stage
-                        git add .
-                        git commit -m "Automated build and tests passed - pushing to stage branch"
-                        git push origin stage --force
-                        '''
-                    } else {
-                        sh '''
-                        git checkout -B stage
-                        git add .
-                        git commit -m "Automated build and tests passed - pushing to stage branch"
-                        git push origin stage --force
-                        '''
-                    }
-                }
-            }
-        }
-    }
-*/
+        
     post {
         always {
             script {
@@ -120,3 +94,4 @@ pipeline {
         }
     }
 }
+
