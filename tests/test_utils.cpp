@@ -1,14 +1,15 @@
-#include "utils.h"
-#include <gtest/gtest.h>
+#include "utils.h"    // Include the header only
+#include <cassert>    // For simple testing
+#include <iostream>
 
-class UtilsTest : public ::testing::Test {};
+int main() {
+    // Test the add function
+    assert(add(2, 3) == 5);
+     assert(add(-1, 1) == 0);
 
-TEST_F(UtilsTest, AddTest) {
-    EXPECT_EQ(add(2, 3), 5);
-    EXPECT_EQ(add(-1, 1), 0);
-}
-
-TEST_F(UtilsTest, GreetTest) {
-    // Just check greet runs without crashing
+   // Call greet (you can just call it, prints output)
     greet();
+
+    std::cout << "Utils All Test Cases passed!\n";
+    return 0;
 }
