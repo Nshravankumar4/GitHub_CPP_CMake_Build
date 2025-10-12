@@ -14,7 +14,7 @@ pipeline {
                     if (isUnix()) {
                         sh 'echo "No setup script for Unix yet"'
                     } else {
-                        // Run the Windows batch setup script and pass branch 'main'
+                        // Run the Windows batch setup script
                         def status = bat(script: 'Scripts\\Setup_Repo.bat main', returnStatus: true)
                         if (status != 0) {
                             error "Setup script failed on branch main"
@@ -46,7 +46,7 @@ pipeline {
             }
         }
 
-        stage('Run') {
+        stage('Run Main App') {
             steps {
                 script {
                     if (isUnix()) {
@@ -58,7 +58,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Run Tests') {
             steps {
                 script {
                     if (isUnix()) {
@@ -67,15 +67,13 @@ pipeline {
                         ctest --output-on-failure
                         '''
                     } else {
-                        bat '''
-                        cd build\\tests\\Release
-                        runTests.exe
-                        '''
+                        // Run all tests via CTest on Windows
+                        bat 'cd build && ctest --output-on-failure -C Release'
                     }
                 }
             }
         }
-    } // <-- Close stages here
+    }
 
     post {
         always {
@@ -88,10 +86,10 @@ pipeline {
             }
         }
         success {
-            echo "Setup, build, run, and test succeeded"
+            echo "Setup, build, run, and tests succeeded"
         }
         failure {
-            echo "Setup, build, run, or test failed"
+            echo "Setup, build, run, or tests failed"
         }
     }
 }
