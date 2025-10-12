@@ -8,14 +8,17 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Use Windows because you have app.exe
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake g++ build-essential
+      run: |
+        choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"' -y
+        choco install visualstudio2019buildtools -y
+        choco install git -y
 
     - name: Configure CMake
       run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
@@ -24,15 +27,13 @@ jobs:
       run: cmake --build build --config Release
 
     - name: Run main executable
-      run: ./build/app
+      run: build\Release\app.exe
 
     - name: Run tests using CTest
-      run: |
-        cd build
-        ctest --output-on-failure
+      run: cmake --build build --config Release && cd build && ctest --output-on-failure -C Release
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
       with:
         name: app-executable
-        path: build/app
+        path: build\Release\app.exe
