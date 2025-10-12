@@ -4,7 +4,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Nshravankumar4/cpp-cmake-ci-demo.git'
+                git branch: 'main', url: 'https://github.com/Nshravankumar4/GitHub_CPP_CMake_Build.git'
+            }
+        }
+
+        stage('Setup') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        // If you have a Linux/Mac setup script, you can call it here
+                        sh 'echo "No setup script for Unix yet"'
+                    } else {
+                        // Run the Windows batch setup script
+                        bat 'Script\\setuprepo.bat'
+                    }
+                }
             }
         }
 
@@ -15,14 +29,14 @@ pipeline {
                         sh '''
                         mkdir -p build
                         cd build
-                        cmake ..
+                        cmake .. -DCMAKE_BUILD_TYPE=Release
                         cmake --build . --config Release
                         '''
                     } else {
                         bat '''
                         mkdir build
                         cd build
-                        cmake ..
+                        cmake .. -DCMAKE_BUILD_TYPE=Release
                         cmake --build . --config Release
                         '''
                     }
@@ -41,6 +55,24 @@ pipeline {
                 }
             }
         }
+
+        stage('Test') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh '''
+                        cd build
+                        ctest --output-on-failure
+                        '''
+                    } else {
+                        bat '''
+                        cd build\\tests\\Release
+                        runTests.exe
+                        '''
+                    }
+                }
+            }
+        }
     }
 
     post {
@@ -54,10 +86,10 @@ pipeline {
             }
         }
         success {
-            echo "Build and run succeeded"
+            echo "Setup, build, run, and tests succeeded"
         }
         failure {
-            echo "Build or run failed"
+            echo "Setup, build, run, or tests failed"
         }
     }
 }
