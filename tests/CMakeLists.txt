@@ -1,17 +1,18 @@
-# Enable CTest for running tests
 enable_testing()
 
-# Add test executable
-add_executable(runTests
-    test_hello.cpp      # original test
-    test_utils.cpp      # new test
+# Shared object library (no multiple definition issues)
+add_library(app_sources OBJECT
+    ../src/hello.cpp
+    ../src/utils.cpp
 )
+target_include_directories(app_sources PUBLIC ../include)
 
-# Include headers
-target_include_directories(runTests PRIVATE ../include)
+# First test
+add_executable(test_hello test_hello.cpp)
+target_link_libraries(test_hello PRIVATE app_sources)
+add_test(NAME HelloTest COMMAND test_hello)
 
-# Link shared object files to test executable
-target_link_libraries(runTests PRIVATE app_sources)
-
-# Register the test with CTest
-add_test(NAME HelloTest COMMAND runTests)
+# Second test
+add_executable(test_utils test_utils.cpp)
+target_link_libraries(test_utils PRIVATE app_sources)
+add_test(NAME UtilsTest COMMAND test_utils)
