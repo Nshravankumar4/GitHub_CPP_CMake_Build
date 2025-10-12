@@ -1,18 +1,15 @@
-#include "utils.h"
+#include "utils.h"    // Include the header only
+#include <cassert>    // For simple testing
 #include <iostream>
 
-// Function to add two integers
-// Parameters:
-//   a - first integer
-//   b - second integer
-// Returns:
-//   Sum of a and b
-int add(int a, int b) {
-    return a + b;
-}
+int main() {
+    // Test the add function
+    assert(add(2, 3) == 5);
+     assert(add(-1, 1) == 0);
 
-// Simple greeting function
-// Prints a greeting message to the console
-void greet() {
-    std::cout << "Hello from utils!\n";
+   // Call greet (you can just call it, prints output)
+    greet();
+
+    std::cout << "Utils All Test Cases passed!\n";
+    return 0;
 }
