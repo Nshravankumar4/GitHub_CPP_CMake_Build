@@ -75,7 +75,8 @@ pipeline {
                 }
             }
         }
-        
+    } // <-- Close stages here
+
     post {
         always {
             script {
@@ -87,11 +88,10 @@ pipeline {
             }
         }
         success {
-            echo "Setup, build, run, test, and stage push succeeded"
+            echo "Setup, build, run, and test succeeded"
         }
         failure {
-            echo "Setup, build, run, test, or stage push failed"
+            echo "Setup, build, run, or test failed"
         }
     }
 }
-
