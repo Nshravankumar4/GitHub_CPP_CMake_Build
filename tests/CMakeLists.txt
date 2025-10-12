@@ -18,4 +18,3 @@ add_executable(test_utils
 )
 target_link_libraries(test_utils PRIVATE app_sources)
 add_test(NAME UtilsTest COMMAND test_utils)
-ctest_sleep()

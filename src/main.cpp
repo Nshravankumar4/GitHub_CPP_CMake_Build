@@ -1,10 +1,20 @@
-#include <iostream>     // Include the standard input/output stream library for printing to console
-#include "hello.h"      // Include the header file for hello.cpp, which declares the getMessage() function
+#include <iostream>    // For standard input/output
+#include "hello.h"     // Declares getMessage()
+#include "utils.h"     // Declares add() and greet()
 
 int main() {
-    // Print the message returned by getMessage() to the console
+    // Print the message from hello.cpp
     std::cout << "Message: " << getMessage() << std::endl;
 
-    // Return 0 to indicate that the program executed successfully
+    // Demonstrate a simple addition using utils.cpp
+    int a = 5, b = 7;
+    std::cout << "Addition of " << a << " + " << b << " = " << add(a, b) << std::endl;
+
+    // Call greet() function
+    greet();
+
+    std::cout << "Program executed successfully!" << std::endl;
+
+    // Return 0 to indicate successful execution
     return 0;
 }
