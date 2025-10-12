@@ -26,13 +26,10 @@ jobs:
     - name: Run main executable
       run: ./build/app
 
-    - name: Run tests
+    - name: Run tests using CTest
       run: |
-        if [ -f build/tests/runTests ]; then
-          ./build/tests/runTests
-        else
-          echo "No tests found"
-        fi
+        cd build
+        ctest --output-on-failure
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
