@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Use Windows because you have app.exe
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
@@ -20,17 +20,18 @@ jobs:
         choco install visualstudio2019buildtools -y
         choco install git -y
 
-    - name: Configure CMake
-      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-
-    - name: Build project
-      run: cmake --build build --config Release
+    - name: Configure and Build
+      run: |
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build --config Release
 
     - name: Run main executable
       run: build\Release\app.exe
 
     - name: Run tests using CTest
-      run: cmake --build build --config Release && cd build && ctest --output-on-failure -C Release
+      run: |
+        cd build
+        ctest --output-on-failure -C Release
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
