@@ -16,7 +16,7 @@ pipeline {
                         sh 'echo "No setup script for Unix yet"'
                     } else {
                         // Run the Windows batch setup script
-                        bat 'Script\\setuprepo.bat'
+                        bat 'Scripts\\Setup_Repo.bat'
                     }
                 }
             }
@@ -93,3 +93,4 @@ pipeline {
         }
     }
 }
+
