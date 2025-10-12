@@ -75,7 +75,7 @@ pipeline {
                 }
             }
         }
-
+/*
         stage('Push to Stage') {
             when {
                 expression { currentBuild.currentResult == 'SUCCESS' }
@@ -101,7 +101,7 @@ pipeline {
             }
         }
     }
-
+*/
     post {
         always {
             script {
