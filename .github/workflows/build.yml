@@ -1,4 +1,4 @@
-name: C++ CI
+name: C++ CI/CD
 
 on:
   push:
@@ -15,14 +15,27 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake g++
+      run: sudo apt-get update && sudo apt-get install -y cmake g++ build-essential
 
     - name: Configure CMake
-      run: cmake -S . -B build
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 
     - name: Build project
-      run: cmake --build build
+      run: cmake --build build --config Release
 
-    - name: Run executable
+    - name: Run main executable
       run: ./build/app
 
+    - name: Run tests
+      run: |
+        if [ -f build/tests/runTests ]; then
+          ./build/tests/runTests
+        else
+          echo "No tests found"
+        fi
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-executable
+        path: build/app
