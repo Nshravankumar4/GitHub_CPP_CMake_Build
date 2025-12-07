@@ -1,28 +1,24 @@
 cmake_minimum_required(VERSION 3.10)
 project(CppCICDDemo VERSION 1.0)
 
-# Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# -------------------------------------------------------------
-# Shared object library for source files
-# -------------------------------------------------------------
+# Build objects for reuse in the app and tests
 add_library(app_sources OBJECT
-    src/hello.cpp
-    src/utils.cpp
+  src/hello.cpp
+  src/utils.cpp
 )
 target_include_directories(app_sources PUBLIC include)
+target_compile_features(app_sources PUBLIC cxx_std_17)
 
-# -------------------------------------------------------------
-# Main app executable
-# -------------------------------------------------------------
+a_dd_executable_placeholder
 add_executable(app
-    src/main.cpp
+  src/main.cpp
+  $<TARGET_OBJECTS:app_sources>
 )
-target_link_libraries(app PRIVATE app_sources)
+target_include_directories(app PUBLIC include)
+target_compile_features(app PUBLIC cxx_std_17)
 
-# -------------------------------------------------------------
-# Include the tests directory
-# -------------------------------------------------------------
+enable_testing()
 add_subdirectory(tests)
